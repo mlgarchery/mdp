@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "build": "parcel build index.html --public-url /mdp -d docs"
+    }
+}
