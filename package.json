@@ -1,5 +1,17 @@
 {
     "scripts": {
-        "build": "parcel build index.html --public-url /mdp -d docs"
+        "dev": "NODE_PATH=. npx parcel index.html",
+        "build": "rm -rf docs/ && NODE_PATH=. npx parcel build index.html --public-url /mdp -d docs --no-source-maps"
+    },
+    "devDependencies": {
+        "@vue/component-compiler-utils": "^3.2.0",
+        "parcel-bundler": "^1.12.4",
+        "sass": "^1.32.7",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "babel-polyfill": "^6.26.0",
+        "vue": "^2.6.12",
+        "vue-hot-reload-api": "^2.3.4"
     }
 }
