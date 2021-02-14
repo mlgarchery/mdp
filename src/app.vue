@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h2 ref="title"> mdp </h2>
+  <div id='container'>
+    <div>
+      <h2 ref="title"> mdp </h2>
+    </div>
     <div id="parameters">
       <input 
         ref="discriminator"
@@ -17,9 +19,14 @@
         @mousedown="show_parameters"
         @mouseup="hide_parameters"
         @mouseleave="hide_parameters"
+        v-touch:start="show_parameters"
+        v-touch:end="hide_parameters"
         >show</button>
-    <div>
+    </div>
+    <div  class="separator">
       <p> Repeat (recommended when generating the password for the first time) </p>
+    </div>
+    <div id="repeat_parameters">
       <input 
         ref="repeat_discriminator"
         type="password" 
@@ -30,17 +37,21 @@
         type="password" 
         placeholder="repeat secret" 
         v-model=repeat_secret>
-    <div>
     </div>
-    <button name="generate" type="button" @click="generate">Generate</button>
-    <span class="error"> {{ generate_info_box }} </span>
-    <div id="result">
-      <div>
-        <span id="info_box" class="positive" v-show="show_info_box">{{text_info_box}}</span>
-        <br/>
-      </div>
+    <div class="separator">
+      <span class="error"> {{ generate_info_box }} </span>
+    </div>
+    <div id="button_generate">
+      <button id="button_generate" type="button" @click="generate_password">Generate</button>
+    </div>
+    <div class="separator">
+      <span class="positive" v-show="show_info_box">{{text_info_box}}</span>
+    </div>
+    <div id="password">
+     
       <input 
         readonly
+        size=35
         ref="clip"
         type="password"
         placeholder="generated password" 
@@ -53,19 +64,23 @@
         type="button" 
         @mousedown="show_password"
         @mouseup="hide_password"
-        @mouseleave="hide_password">
+        @mouseleave="hide_password"
+        v-touch:start="show_password"
+        v-touch:end="hide_password">
+        
         show
       </button>
     </div>
-    <div>
+    <div id="clear_clipboard">
       <button type="button" @click="clear_clipboard">Clear Clipboard</button>
-      <div id="empty_result"><span class="positive">{{clipboard_info_text}}</span></div>
+    </div>
+    <div class="separator">
+      <span class="positive">{{clipboard_info_text}}</span>
     </div>
   </div>
 </template>
 
 <script lang="js">
-import 'babel-polyfill';
 import Vue from "vue";
 import { mdp } from '/src/mdp.js';
 
@@ -84,7 +99,8 @@ export default Vue.extend({
     };
   },
   methods: {
-    generate(){
+    generate_password(){
+      if(!this.discriminator && !this.secret) return;
       if(this.repeat_discriminator || this.repeat_secret){
         if(!this.are_repeating_parameters_valid()){
           this.generate_info_box= "Non matching repeating parameters";
@@ -105,6 +121,8 @@ export default Vue.extend({
     reset_parameters(){
       this.discriminator = "";
       this.secret = "";
+      this.repeat_discriminator = "";
+      this.repeat_secret = "";
     },
     copy_to_clipboard(){
       const clip = this.$refs.clip;
@@ -126,7 +144,6 @@ export default Vue.extend({
 
       this.clipboard_info_text = "Emptied clipboard !"
       setTimeout(() => this.clipboard_info_text = "", 1000);
-
       // also clear password
       this.password = "";
     },
@@ -154,15 +171,34 @@ export default Vue.extend({
 });
 </script>
 
+<style lang="scss">
+@import url('./main.scss');
+</style>
+
 <style lang="scss" scoped>
+#container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 450px;
+
+  & * {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2px;
+  }
+}
+.separator{
+  min-height: 1.3em;
+}
 input::-ms-reveal,
 input::-ms-clear {
   display: none;
 }
 .error {
-  color: red;
+  color: darkred;
 }
 .positive {
-  color: green;
+  color: darkgreen;
 }
 </style>
