@@ -1,7 +1,7 @@
 # mdp
 "mot de passe" is a password generator for those who don't want to rely (exclusively) on password managers for storing all the websites they use and their passwords.
 
-*The words "discriminator", "website", "service" are used interchangably in this document.*
+*The words "discriminator", "website", "service" are used interchangeably in this document.*
 
 ## Issue with today's password managers
  

@@ -1,18 +1,25 @@
 {
     "scripts": {
-        "dev": "NODE_PATH=. npx parcel index.html",
-        "build": "rm -rf docs/ && NODE_ENV=production NODE_PATH=. npx parcel build index.html --public-url /mdp -d docs --no-source-maps"
-    },
-    "devDependencies": {
-        "@vue/component-compiler-utils": "^3.2.0",
-        "parcel-bundler": "^1.12.4",
-        "vue-hot-reload-api": "^2.3.4",
-        "vue-template-compiler": "^2.6.12"
+        "dev": "npx parcel index.html",
+        "build": "rm -rf docs/ && NODE_ENV=production NODE_PATH=. npx parcel build index.html --public-url /mdp -d docs --no-source-maps",
+        "stylelint": "npx stylelint src/*.scss",
+        "stylelint:vue": "npx stylelint 'src/*vue' --syntax scss"
     },
     "dependencies": {
         "js-sha256": "^0.9.0",
         "sass": "^1.32.7",
         "vue": "^2.6.12",
         "vue2-touch-events": "^3.1.1"
+    },
+    "devDependencies": {
+        "@vue/component-compiler-utils": "^3.2.0",
+        "parcel-bundler": "^1.12.4",
+        "parcel-plugin-static-files-copy": "^2.5.1",
+        "stylus": "^0.54.8",
+        "vue-hot-reload-api": "^2.3.4",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "stylelint": {
+        "extends": "stylelint-config-standard"
     }
 }
