@@ -33,6 +33,7 @@
         <input class="sensitive" type="password" ref="repeat_secret" placeholder="repeat secret" v-model=repeat_secret>
       </IconWrapper>
       <Icon v-if="are_repeating_parameters_valid" name="check-all.svg"></Icon>
+      <Icon v-else name="x-circle.svg"></Icon>
     </div>
     <div class="separator">
       <span class="error"> {{ generate_info_box }} </span>
@@ -69,6 +70,9 @@
         v-touch:end="hide_password"
       ></Icon>
     </div>
+    <div class="separator">
+      <span class="positive">{{clipboard_info_text}}</span>
+    </div>
     <div id="clear_clipboard">
       <button 
         type="button" 
@@ -77,9 +81,6 @@
         @keydown.space="clear_clipboard"
         @keydown.delete="clear_clipboard"
       >Clear Clipboard (Esc)</button>
-    </div>
-    <div class="separator">
-      <span class="positive">{{clipboard_info_text}}</span>
     </div>
   </div>
 </template>
@@ -173,6 +174,7 @@ export default Vue.extend({
       setTimeout(() => this.clipboard_info_text = "", 1000);
       // also clear password
       this.password = "";
+      this.reset_parameters();
     },
     show_parameters(){
       this.areParametersShown = true;

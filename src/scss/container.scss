@@ -13,12 +13,10 @@
   }
   &>* {
     display: flex;
+    width: 100%;
+    justify-content: center;
   }
 
-  .separator{
-    min-height: 1.3em;
-  }
-  
   input::-ms-reveal,
   input::-ms-clear {
     display: none;
@@ -29,8 +27,8 @@
   
   .separator {
     width: 100%;
+    margin: 10px 0 10px 0;
     min-height: 1.5em;
-    justify-content: center;
 
     .positive {
       margin-top: 5px;
