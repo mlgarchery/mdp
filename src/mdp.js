@@ -7,7 +7,6 @@ const PASSWORD_LENGTH = 30;
 const SPECIAL_CHARS = '!@#$%^&*()-=_+<>?'.split('');
 const NUMBERS = '01234567890'.split('');
 const LOWERCASES = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const UPPERCASES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export function mdp(discriminator, secret){
     // using sha256
@@ -35,8 +34,6 @@ function munge_password(password){
     
     https://en.wikipedia.org/wiki/Munged_password
     */
-
-
     const { c_letters, c_numbers } = count_letters_and_numbers(password);
     const target_percentage_special = 0.2
     const target_percentage_uppercase = 0.2;

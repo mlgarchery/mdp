@@ -1,8 +1,6 @@
 <template>
-  <div id='container'>
-    <div id="title">
-      <h2 ref="title"> mdp </h2>
-    </div> 
+  <div id='container' :class="{ 'mobile': mobileDevice}">
+    <h1 ref="title"> mdp </h1>
     <div id="parameters">
       <IconWrapper name="shop.svg">
         <input class="sensitive" type="password" ref="discriminator" placeholder="discriminator" v-model=discriminator>
@@ -14,6 +12,7 @@
         name="eye.svg"
         type="button"
         :class="{ 'shown': areParametersShown }"
+        draggable="false"
         @mousedown="show_parameters"
         @mouseup="hide_parameters"
         @mouseleave="hide_parameters"
@@ -22,8 +21,8 @@
         v-touch:end="hide_parameters">
       </Icon>
     </div>
-    <div  class="separator">
-      <p> Repeat (recommended when generating the password for the first time) </p>
+    <div class="separator">
+      <p>  Repeat (recommended when generating the password for the first time): </p>
     </div>
     <div id="repeat_parameters">
       <IconWrapper name="shop.svg">
@@ -90,9 +89,13 @@ import Vue from "vue";
 import Icon from './components/Icon';
 import IconWrapper from './components/IconWrapper';
 import { mdp } from '/src/mdp.js';
+import { isMobile } from '/src/utils.js';
 
 export default Vue.extend({
   created(){
+    if(isMobile()){
+      this.mobileDevice = true;
+    }
     this.keydown_handler = e => {
       if(e.key === "Escape"){
         this.clear_clipboard();
@@ -120,7 +123,8 @@ export default Vue.extend({
       clipboard_info_text: "",
       show_info_box: false,
       text_info_box: "",
-      generate_info_box: ""
+      generate_info_box: "",
+      mobileDevice: false,
     };
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-    <img :src="name">
+    <img :src="name" draggable="false" oncontextmenu="return false;">
 </template>
 <script>
 export default {
@@ -15,8 +15,8 @@ export default {
 img {
     padding: 10px;
 
-  &.shown {
-      filter: unset;
-  }
+    &.shown {
+        filter: unset;
+    }
 }
 </style>
