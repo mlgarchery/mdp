@@ -17,7 +17,6 @@ export function slow_hash(secret, discriminator){
     return key.toString('hex')
 }
 
-
 export function munge_password(password){
     /*
     password is PASSWORD_LENGTH long and contains lowercase and numbers.

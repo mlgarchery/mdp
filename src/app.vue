@@ -1,5 +1,11 @@
 <template>
   <div id='container' :class="{ 'mobile': mobileDevice}">
+    <div class="hashes"> 
+      sha256sum
+      <span class="hash"> 5ab9f3e6a7ae6172ad28f577d9e791acc28a71357e25f5cf8f328e6e2dd96773  src/mdp.js </span> 
+      <span class="hash"> 1a1b446fa4a00ec931705a5456b683d496132f25f4008935a09a6dcc6fdb69d0  package.json </span> 
+    </div>
+
     <h1 ref="title"> mdp </h1>
     <div id="parameters">
       <IconWrapper name="shop.svg">
@@ -109,7 +115,7 @@ export default Vue.extend({
   },
   components: {
     IconWrapper,
-    Icon
+    Icon,
   },
   data() {
     return {
