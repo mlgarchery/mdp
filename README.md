@@ -11,8 +11,6 @@ Don't get me wrong, they are very useful. Having to only remember one password, 
 
 ## mdp concept
 
-It's almost nothing.
-
 The idea is to replicate password managers concepts without the stockage part: **mdp** is just a password generator based on a *discriminator* to identify each websites uniquely (for example, something related to its url - your choice) and on one *secret*.
 **mdp** generates a password with that
 
@@ -22,11 +20,12 @@ password = mdp(discriminator + secret)
 /* example: 
 for discriminator=twitter.com and secret=mySecre1_ 
 mdp("twitter.commySecret1_") = 88d4757b6739c885b3d3817090cf8d4703581105 
-(if mdp=sha1sum - for illustration purpose)
+(if mdp=sha1sum - for illustration purpose only)
 */
 ```
 
-**mdp** is essentially a slow hash function.
+**mdp** is essentially a slow hash function, for exemple [pbkdf2](https://en.wikipedia.org/wiki/PBKDF2)
+
 
 **(1)** Yeah, you also need **mdp** everywhere you need to login. The difference is that you can put it everywhere you want (browser, mobile, an USB key, write the code source on your toilet paper): it doesn't contain any critical data. Password managers keep a hash of your secret, not **mdp**.
 
@@ -39,9 +38,7 @@ In the end, **mdp** usage requires more logic than memory (finding a good discri
 
 We could simplify user discriminators management by storing a little file containing hash of them. If a user change a password for a certain discriminator, we would check if we don't have the hash of this discriminator in memory. If it is the case, we can store a second hash of "discriminator${n}" (appending "n" to the string, n being the number of time the password changed), changing the discriminator under the hood without changing what the user has to memorise.
 
-Hashes of discriminators seem not so critical. Even if found by an attacker, and say, cracked (which is very unlikely), it's only discriminators/urls.
-
-But I don't like the idea of storing something. We'll end up having to sync a file on multiple devices like password managers. It could be an option though.
+But I don't like the idea of storing something. We'll end up having to sync a file on multiple devices like password managers. It should stay optionnal.
 
 ## Final thoughts
 
