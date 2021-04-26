@@ -56,7 +56,7 @@ npm run dev # launch parcel-bundler hot-reloading dev server
 
 (Until the CI is put in place):
 
-Build the output index.html and js bundle in `docs/` with:
+Build the output index.html and js bundle in `dist/` with:
 ```
 npm run build
 ```

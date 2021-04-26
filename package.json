@@ -1,7 +1,8 @@
 {
     "scripts": {
         "dev": "npx parcel index.html",
-        "build": "rm -rf docs/ && NODE_ENV=production NODE_PATH=. npx parcel build index.html --public-url /mdp -d docs --no-source-maps",
+        "build": "rm -rf dist/ && NODE_ENV=production npx parcel build ./index.html --no-source-maps --public-url ./",
+        "build:github": "rm -rf docs/ && NODE_ENV=production npx parcel build index.html --public-url /mdp -d docs --no-source-maps",
         "stylelint": "npx stylelint src/*.scss",
         "stylelint:vue": "npx stylelint 'src/*vue' --syntax scss",
         "test": "NODE_PATH=. NODE_OPTIONS=--experimental-vm-modules npx jest"
